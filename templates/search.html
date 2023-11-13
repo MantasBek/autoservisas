@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Paieškos pagal "{{query}}" rezultatai:</h1>
+  <br>
+  {% if automobiliai %}
+      {% for a in automobiliai %}
+        <li>
+          <a href="{% url 'automobilis' a.id %}">{{ a.id }}</a> {{a.klientas}} - {{a.automobilio_modelis_id}}
+        </li>
+      {% endfor %}
+  {% elif automobilio_modelis %}
+      {% for a in automobilio_modelis %}
+        <li>
+          <a href="{% url 'automobilis' a.id %}">{{ a.id }}</a> ({{a.marke}} - {{a.modelis}})
+        </li>
+      {% endfor %}
+  {% else %}
+    <p>Oops. Nieko neradome apie automobilio modelius :(</p>
+  {% endif %}
+{% endblock %}
