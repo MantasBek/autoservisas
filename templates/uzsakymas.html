@@ -1,26 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-
-    <h1>Užsakymo Nr. {{uzsakymo_eilute.id}}</h1>
-    {% if uzsakymo_eilute %}
-        <p><strong>Užsakymas:</strong>
-            {% for a in uzsakymo_eilute.uzsakymas_id.uzsakymo_eilute_set.all %}
-                {{ a.paslauga_id }},
-            {% endfor %}
-        </p>
+  <div class="container mt-4">
+    <h1>Užsakymo Nr. {{uzsakymas.id}}</h1>
+    {% if uzsakymas %}
+      <p><strong>Užsakymas: </strong>{{uzsakymas.uzsakymo_eilute_set.all|join:", "}}</p>
     {% else %}
-        <p><strong>Užsakymas:</strong> užsakymas nerastas</p>
+      <p><strong>Užsakymas:</strong> užsakymas nerastas</p>
     {% endif %}
-    <p><strong>Užsakovas:</strong> {{uzsakymo_eilute.uzsakymas_id.automobilis_id.klientas}}</p>
-    <p><strong>Užsakymo data:</strong> {{uzsakymo_eilute.uzsakymas_id.data|date:"Y-d-m"}}</p>
-    <p><strong>Valstybinis Nr.:</strong> {{uzsakymo_eilute.uzsakymas_id.automobilis_id.valstybinis_nr}}</p>
-    <p><strong>Automobilio marke/modelis:</strong> {{uzsakymo_eilute.uzsakymas_id.automobilis_id.automobilio_modelis_id.marke}}/{{uzsakymo_eilute.uzsakymas_id.automobilis_id.automobilio_modelis_id.modelis}}</p>
-    <p><strong>VIN:</strong> {{uzsakymo_eilute.uzsakymas_id.automobilis_id.vin_kodas}}<p>
-    {% for a in uzsakymo_eilute.uzsakymas_id.uzsakymo_eilute_set.all %}
-        <hr>
-        <p class="{% if a.status == 't' %}text-success{% elif a.status == 'v' %}text-warning{% elif a.status == 'a' %}text-danger{% else %}text-success{% endif %}">
-            {{ a.get_status_display }}
-        </p>
-    {% endfor %}
-
+    <p><strong>Užsakovas:</strong> {{uzsakymas.automobilis_id.klientas}}</p>
+    <p><strong>Užsakymo data:</strong> {{uzsakymas.data|date:"Y-d-m"}}</p>
+    <p><strong>Valstybinis Nr.:</strong> {{uzsakymas.automobilis_id.valstybinis_nr}}</p>
+    <p><strong>Automobilio marke/modelis:</strong> {{uzsakymas.automobilis_id.automobilio_modelis_id.marke}}/{{uzsakymas.automobilis_id.automobilio_modelis_id.modelis}}</p>
+    <p><strong>VIN:</strong> {{uzsakymas.automobilis_id.vin_kodas}}</p>
+    <hr>
+    <p class="{% if uzsakymas.status == 't' %}text-success{% elif uzsakymas.status == 'v' %}text-warning{% elif uzsakymas.status == 'a' %}text-danger{% else %}text-success{% endif %}">
+      {{ uzsakymas.get_status_display }}
+    </p>
+    <a href="{% url 'uzsakymai' %}" class="btn btn-secondary mt-3"> Atgal</a>
+  </div>
 {% endblock %}

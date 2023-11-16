@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Automobilio informacija</h1>
-<ul class="automobilio savininkas">
-    <li> Savininkas: {{automobilis.klientas}}</li>
-    <li> Valstybinis Nr.: {{automobilis.valstybinis_nr}}</li>
-    <li> Gamintojas: {{automobilis.automobilio_modelis_id.marke}}</li>
-    <li> Modelis: {{automobilis.automobilio_modelis_id.modelis}}</li>
-    <li> VIN kodas: {{automobilis.vin_kodas}}</li>
-</ul>
-<a href="{% url 'automobiliai' %}"> Atgal</a>
+  <div class="container mt-4">
+    <h1>Automobilio informacija</h1>
+    <ul class="automobilio savininkas">
+      <li>Savininkas: {{automobilis.klientas}}</li>
+      <li>Valstybinis Nr.: {{automobilis.valstybinis_nr}}</li>
+      <li>Gamintojas: {{automobilis.automobilio_modelis_id.marke}}</li>
+      <li>Modelis: {{automobilis.automobilio_modelis_id.modelis}}</li>
+      <li>VIN kodas: {{automobilis.vin_kodas}}</li>
+    </ul>
+    <a href="{% url 'automobiliai' %}" class="btn btn-secondary mt-3">Atgal</a>
+  </div>
 {% endblock %}
